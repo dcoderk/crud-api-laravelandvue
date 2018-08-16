@@ -23,4 +23,12 @@ class Event extends JsonResource
             'status'       =>  $this->status
         ];
     }
+
+    // adding new data
+    public function with($request) {
+        return [
+            'version'     => '1.0',
+            
+        ];
+    }
 }

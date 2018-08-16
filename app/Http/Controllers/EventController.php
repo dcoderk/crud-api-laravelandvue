@@ -41,7 +41,18 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $event = $request->isMethod('put') ? Event::findOrFail
+        ($request->event_id) : new Event;
+
+        $event->id = $request->input('event_id');
+        $event->name = $request->input('name');
+        $event->description = $request->input('description');
+        $event->code = $request->input('code');
+        $event->status = $request->input('status');
+
+        if($event->save()) {
+            return new EventResource($event);
+        }
     }
 
     /**
@@ -52,7 +63,11 @@ class EventController extends Controller
      */
     public function show($id)
     {
-        //
+        // Get event
+        $event = Event::findOrFail($id);
+
+        // Return single event as a resource
+        return new EventResource($event);
     }
 
     /**
@@ -86,6 +101,11 @@ class EventController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $event = Event::findOrFail($id);
+
+        if($event->delete()) {
+            return new EventResource($event);
+        }
+        
     }
 }
