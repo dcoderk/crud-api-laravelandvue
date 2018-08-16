@@ -18,7 +18,7 @@ php artisan migrate
 php artisan db:seed
 
 
-#Endpoints
+# Endpoints
 
 List all events with links
 GET api/events
